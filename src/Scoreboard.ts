@@ -23,4 +23,8 @@ export class Scoreboard {
     findMatch(home: string, away: string): IMatch | undefined {
         return this.matches.find((m) => m.homeTeam === home && m.awayTeam === away);
     }
+
+    getLiveMatches() {}
+
+    getFinishedMatches() {}
 }
