@@ -24,7 +24,11 @@ export class Scoreboard {
         return this.matches.find((m) => m.homeTeam === home && m.awayTeam === away);
     }
 
-    getLiveMatches() {}
+    getLiveMatches() {
+        return this.matches.filter((m) => m.isLive());
+    }
 
-    getFinishedMatches() {}
+    getFinishedMatches() {
+        return this.matches.filter((m) => !m.isLive());
+    }
 }

@@ -6,9 +6,9 @@ export class Match implements IMatch {
     homeScore: number;
     awayScore: number;
     finished: boolean;
-    startTime: number;
+    #startTime: number;
     private matchLength: number;
-    private interval: ReturnType<typeof setInterval>;
+    #interval: ReturnType<typeof setInterval>;
 
     constructor(homeTeam: string, awayTeam: string) {
         this.homeTeam = homeTeam;
@@ -16,13 +16,13 @@ export class Match implements IMatch {
         this.homeScore = 0;
         this.awayScore = 0;
         this.finished = false;
-        this.startTime = Date.now();
+        this.#startTime = Date.now();
         this.matchLength = 90_000; // 90 seconds
-        this.interval = setInterval(() => this.trackTime(), 1000);
+        this.#interval = setInterval(() => this.trackTime(), 1000);
     }
 
     private trackTime() {
-        const diff = Date.now() - this.startTime;
+        const diff = Date.now() - this.#startTime;
         if (diff >= this.matchLength) {
             this.finish();
         }
@@ -36,7 +36,7 @@ export class Match implements IMatch {
     finish() {
         if (!this.finished) {
             this.finished = true;
-            clearInterval(this.interval);
+            clearInterval(this.#interval);
         }
     }
 

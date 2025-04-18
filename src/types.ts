@@ -4,7 +4,7 @@ export interface IMatch {
     homeScore: number;
     awayScore: number;
     finished: boolean;
-    startTime: number;
+    isLive(): boolean;
 }
 
 export enum EventsTypes {
