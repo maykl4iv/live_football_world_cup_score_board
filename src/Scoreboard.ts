@@ -1,4 +1,5 @@
-import { IMatch } from "./types";
+import { IMatch, IEvent, EventsTypes } from "./types";
+import { Match } from "./Match";
 
 export class Scoreboard {
     matches: IMatch[];
@@ -7,7 +8,19 @@ export class Scoreboard {
         this.matches = [];
     }
 
-    findMatch(home: string, away: string): IMatch {
-        return {} as IMatch;
+    feed(event: IEvent<EventsTypes>) {
+        const match = this.findMatch(event.homeTeam, event.awayTeam);
+
+        switch (event.type) {
+            case EventsTypes.start:
+                if (!match) {
+                    this.matches.push(new Match(event.homeTeam, event.awayTeam));
+                }
+                break;
+        }
+    }
+
+    findMatch(home: string, away: string): IMatch | undefined {
+        return this.matches.find((m) => m.homeTeam === home && m.awayTeam === away);
     }
 }
