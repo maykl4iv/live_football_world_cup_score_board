@@ -4,6 +4,9 @@ export class Match {
     homeScore: number;
     awayScore: number;
     finished: boolean;
+    startTime: number;
+    private matchLength: number;
+    private interval: ReturnType<typeof setInterval>;
 
     constructor(homeTeam: string, awayTeam: string) {
         this.homeTeam = homeTeam;
@@ -11,6 +14,16 @@ export class Match {
         this.homeScore = 0;
         this.awayScore = 0;
         this.finished = false;
+        this.startTime = Date.now();
+        this.matchLength = 90_000; // 90 seconds
+        this.interval = setInterval(() => this.trackTime(), 1000);
+    }
+
+    private trackTime() {
+        const diff = Date.now() - this.startTime;
+        if (diff >= this.matchLength) {
+            this.finish();
+        }
     }
 
     updateScore(home: number, away: number) {
@@ -19,7 +32,10 @@ export class Match {
     }
 
     finish() {
-        this.finished = true;
+        if (!this.finished) {
+            this.finished = true;
+            clearInterval(this.interval);
+        }
     }
 
     isLive() {
