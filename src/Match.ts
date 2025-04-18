@@ -11,6 +11,8 @@ export class Match {
         this.awayScore = 0;
     }
 
+    updateScore(home: number, away: number) {}
+
     getSummaryString() {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
     }
