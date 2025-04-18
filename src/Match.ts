@@ -11,7 +11,10 @@ export class Match {
         this.awayScore = 0;
     }
 
-    updateScore(home: number, away: number) {}
+    updateScore(home: number, away: number) {
+        this.homeScore = home;
+        this.awayScore = away;
+    }
 
     getSummaryString() {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
