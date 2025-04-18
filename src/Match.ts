@@ -20,5 +20,7 @@ export class Match {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
     }
 
-    getTotalAmountOfGoals() {}
+    getTotalAmountOfGoals() {
+        return this.homeScore + this.awayScore;
+    }
 }
