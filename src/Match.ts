@@ -3,12 +3,14 @@ export class Match {
     awayTeam: string;
     homeScore: number;
     awayScore: number;
+    finished: boolean;
 
     constructor(homeTeam: string, awayTeam: string) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
         this.awayScore = 0;
+        this.finished = false;
     }
 
     updateScore(home: number, away: number) {
@@ -16,9 +18,13 @@ export class Match {
         this.awayScore = away;
     }
 
-    finish() {}
+    finish() {
+        this.finished = true;
+    }
 
-    isLive() {}
+    isLive() {
+        return !this.finished;
+    }
 
     getSummaryString() {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
