@@ -16,6 +16,10 @@ export class Match {
         this.awayScore = away;
     }
 
+    finish() {}
+
+    isLive() {}
+
     getSummaryString() {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
     }

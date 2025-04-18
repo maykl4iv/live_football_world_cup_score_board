@@ -24,3 +24,17 @@ test("Creates match, updates score to 3-2 and shows totalAmountOfGoals", () => {
     expect(match.getSummaryString()).toBe("Spain: 3 - 2 :Brazil");
     expect(match.getTotalAmountOfGoals()).toBe(5);
 });
+
+test("Creates match, updates score to 1-1 and finishes Match", () => {
+    const match = new Match("Spain", "Brazil");
+
+    match.updateScore(1, 0);
+    match.updateScore(1, 1);
+
+    expect(match.isLive()).toBe(true);
+    match.finish();
+    expect(match.isLive()).toBe(false);
+
+    expect(match.getSummaryString()).toBe("Spain: 1 - 1 :Brazil");
+    expect(match.getTotalAmountOfGoals()).toBe(2);
+});
