@@ -19,4 +19,6 @@ export class Match {
     getSummaryString() {
         return `${this.homeTeam}: ${this.homeScore} - ${this.awayScore} :${this.awayTeam}`;
     }
+
+    getTotalAmountOfGoals() {}
 }
