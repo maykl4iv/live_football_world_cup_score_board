@@ -1,4 +1,6 @@
-export class Match {
+import { IMatch } from "./types";
+
+export class Match implements IMatch {
     homeTeam: string;
     awayTeam: string;
     homeScore: number;
