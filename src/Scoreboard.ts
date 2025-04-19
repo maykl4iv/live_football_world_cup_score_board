@@ -64,24 +64,10 @@ export class Scoreboard {
 
         if (!final) {
             console.log("Live Matches:\n");
-            this.printMatches(live);
+            this.matchService.printMatches(live);
         }
 
         console.log("\nFinished Matches:");
-        this.printMatches(finished);
-    }
-
-    private printMatches(matches: IMatch[]) {
-        const sorted = [...matches].sort((a, b) => {
-            const diff = b.getTotalAmountOfGoals() - a.getTotalAmountOfGoals();
-            return diff !== 0 ? diff : b.getStartTime() - a.getStartTime();
-        });
-
-        sorted.forEach((match, idx) => {
-            const uptime = Math.ceil((Date.now() - match.getStartTime()) / 1000);
-
-            const timeStr = match.isLive?.() ? ` [${uptime}’]` : "";
-            console.log(`${idx + 1}. ${match.getSummaryString()}${timeStr}\n`);
-        });
+        this.matchService.printMatches(finished);
     }
 }
