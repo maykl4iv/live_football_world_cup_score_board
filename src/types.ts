@@ -9,6 +9,7 @@ export interface IMatch {
     getTotalAmountOfGoals(): number;
     getStartTime(): number;
     getSummaryString(): string;
+    finish(): void;
 }
 
 export enum EventsTypes {

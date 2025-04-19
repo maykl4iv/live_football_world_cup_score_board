@@ -8,6 +8,7 @@ test("Creates match if doesnt exist", () => {
     expect(match).toBeInstanceOf(Match);
     expect(match.homeTeam).toBe("Spain");
     expect(match.awayTeam).toBe("Brazil");
+    match.finish();
 });
 
 test("Should not create a duplicate match", () => {
@@ -15,4 +16,5 @@ test("Should not create a duplicate match", () => {
 
     const duplicateMatch = matchService.createMatch("Spain", "Brazil");
     expect(duplicateMatch).toBe(matchService.createMatch("Spain", "Brazil"));
+    duplicateMatch.finish();
 });
