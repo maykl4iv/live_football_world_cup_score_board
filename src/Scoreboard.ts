@@ -21,7 +21,6 @@ export class Scoreboard {
                     event.homeScore,
                     event.awayScore
                 );
-
                 break;
         }
     }
@@ -29,7 +28,7 @@ export class Scoreboard {
     startTicker() {
         this.render();
         this.#intervalId = setInterval(() => {
-            const liveMatches = this.getLiveMatches();
+            const liveMatches = this.matchService.getLiveMatches();
 
             if (liveMatches.length === 0) {
                 this.stopTicker();
@@ -60,8 +59,8 @@ export class Scoreboard {
     render(final = false) {
         console.clear();
 
-        const live = this.getLiveMatches();
-        const finished = this.getFinishedMatches();
+        const live = this.matchService.getLiveMatches();
+        const finished = this.matchService.getFinishedMatches();
 
         if (!final) {
             console.log("Live Matches:\n");
