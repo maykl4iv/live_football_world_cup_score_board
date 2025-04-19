@@ -12,6 +12,11 @@ export interface IMatch {
     finish(): void;
 }
 
+export interface IMatchService {
+    createMatch(homeTeam: string, awayTeam: string): IMatch;
+    findMatch(homeTeam: string, awayTeam: string): IMatch | undefined;
+}
+
 export enum EventsTypes {
     start = "start",
     score = "score",
