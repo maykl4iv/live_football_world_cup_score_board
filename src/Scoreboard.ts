@@ -48,14 +48,6 @@ export class Scoreboard {
         return this.matchService.findMatch(home, away);
     }
 
-    getLiveMatches() {
-        return this.matchService.getLiveMatches();
-    }
-
-    getFinishedMatches() {
-        return this.matchService.getFinishedMatches();
-    }
-
     render(final = false) {
         console.clear();
 

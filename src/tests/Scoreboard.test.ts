@@ -17,41 +17,6 @@ test("Creates Scoreboard and finds a match", () => {
     jest.advanceTimersByTime(90_000);
 });
 
-test("Creates Scoreboard adds two matches and return live matches and finished matches correctly", () => {
-    const matchOne = new Match("Spain", "Brazil");
-
-    const scoreboard = new Scoreboard();
-
-    scoreboard.feed({
-        type: EventsTypes.start,
-        homeTeam: matchOne.homeTeam,
-        awayTeam: matchOne.awayTeam,
-    });
-
-    expect(scoreboard.getLiveMatches()).toEqual([matchOne]);
-
-    jest.advanceTimersByTime(30_000);
-
-    const matchTwo = new Match("Italy", "England");
-    scoreboard.feed({
-        type: EventsTypes.start,
-        homeTeam: matchTwo.homeTeam,
-        awayTeam: matchTwo.awayTeam,
-    });
-
-    expect(scoreboard.getLiveMatches()).toEqual([matchOne, matchTwo]);
-
-    jest.advanceTimersByTime(60_000);
-
-    expect(scoreboard.getLiveMatches()).toEqual([matchTwo]);
-    expect(scoreboard.getFinishedMatches()).toEqual([matchOne]);
-
-    jest.advanceTimersByTime(30_000);
-
-    expect(scoreboard.getLiveMatches()).toEqual([]);
-    expect(scoreboard.getFinishedMatches()).toEqual([matchOne, matchTwo]);
-});
-
 test("Creates Scoreboard adds two matches, updates score and return live matches and finished matches correctly", () => {
     const logSpy = jest.spyOn(console, "log").mockImplementation();
     jest.useFakeTimers();
@@ -70,7 +35,6 @@ test("Creates Scoreboard adds two matches, updates score and return live matches
     expect(logSpy).toHaveBeenCalledWith("Live Matches:\n");
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()} [0’]\n`);
     expect(logSpy).toHaveBeenCalledWith("\nFinished Matches:");
-    expect(scoreboard.getLiveMatches()).toEqual([matchOne]);
 
     jest.advanceTimersByTime(30_000);
 
@@ -93,7 +57,6 @@ test("Creates Scoreboard adds two matches, updates score and return live matches
     expect(logSpy).toHaveBeenCalledWith("\nFinished Matches:");
 
     matchOne.updateScore(1, 0);
-    expect(scoreboard.getLiveMatches()).toEqual([matchOne, matchTwo]);
 
     jest.advanceTimersByTime(1_000);
 
@@ -101,7 +64,6 @@ test("Creates Scoreboard adds two matches, updates score and return live matches
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()} [31’]\n`);
     expect(logSpy).toHaveBeenCalledWith(`2. ${matchTwo.getSummaryString()} [1’]\n`);
     expect(logSpy).toHaveBeenCalledWith("\nFinished Matches:");
-    expect(scoreboard.getLiveMatches()).toEqual([matchOne, matchTwo]);
 
     jest.advanceTimersByTime(60_000);
 
@@ -127,14 +89,10 @@ test("Creates Scoreboard adds two matches, updates score and return live matches
 
     matchTwo.updateScore(1, 0);
     matchTwo.updateScore(1, 1);
-    expect(scoreboard.getLiveMatches()).toEqual([matchTwo]);
-    expect(scoreboard.getFinishedMatches()).toEqual([matchOne]);
 
     jest.advanceTimersByTime(30_000);
 
     expect(logSpy).toHaveBeenCalledWith("\nFinished Matches:");
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchTwo.getSummaryString()}\n`);
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()}\n`);
-    expect(scoreboard.getLiveMatches()).toEqual([]);
-    expect(scoreboard.getFinishedMatches()).toEqual([matchOne, matchTwo]);
 });
