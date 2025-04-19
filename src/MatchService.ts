@@ -25,5 +25,10 @@ export class MatchService {
         );
     }
 
-    updateScore(homeTeam: string, awayTeam: string, homeScore: number, awayScore: number) {}
+    updateScore(homeTeam: string, awayTeam: string, homeScore: number, awayScore: number) {
+        const match = this.findMatch(homeTeam, awayTeam);
+        if (match && match.isLive()) {
+            match.updateScore(homeScore, awayScore);
+        }
+    }
 }
