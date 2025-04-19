@@ -18,3 +18,13 @@ test("Should not create a duplicate match", () => {
     expect(duplicateMatch).toBe(matchService.createMatch("Spain", "Brazil"));
     duplicateMatch.finish();
 });
+
+test("should update score of a match", () => {
+    const matchService = new MatchService();
+
+    const match = matchService.createMatch("Spain", "Brazil");
+    matchService.updateScore("Spain", "Brazil", 1, 2);
+    expect(match.homeScore).toBe(1);
+    expect(match.awayScore).toBe(2);
+    match.finish();
+});

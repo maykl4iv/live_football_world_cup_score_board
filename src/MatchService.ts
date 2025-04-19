@@ -24,4 +24,6 @@ export class MatchService {
             (match) => match.homeTeam === homeTeam && match.awayTeam === awayTeam
         );
     }
+
+    updateScore(homeTeam: string, awayTeam: string, homeScore: number, awayScore: number) {}
 }
