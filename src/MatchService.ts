@@ -31,4 +31,8 @@ export class MatchService {
             match.updateScore(homeScore, awayScore);
         }
     }
+
+    getLiveMatches() {}
+
+    getFinishedMatches() {}
 }
