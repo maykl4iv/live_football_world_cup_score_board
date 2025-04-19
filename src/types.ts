@@ -5,6 +5,10 @@ export interface IMatch {
     awayScore: number;
     finished: boolean;
     isLive(): boolean;
+    updateScore(home: number, away: number): void;
+    getTotalAmountOfGoals(): number;
+    getStartTime(): number;
+    getSummaryString(): string;
 }
 
 export enum EventsTypes {

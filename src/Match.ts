@@ -28,6 +28,10 @@ export class Match implements IMatch {
         }
     }
 
+    getStartTime() {
+        return this.#startTime;
+    }
+
     updateScore(home: number, away: number) {
         this.homeScore = home;
         this.awayScore = away;
