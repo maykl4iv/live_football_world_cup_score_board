@@ -41,8 +41,19 @@ export class MatchService {
     }
 
     sortMatches(matches: IMatch[]): IMatch[] {
-        return [] as IMatch[];
+        return matches.sort((a, b) => {
+            const diff = b.getTotalAmountOfGoals() - a.getTotalAmountOfGoals();
+            return diff !== 0 ? diff : b.getStartTime() - a.getStartTime();
+        });
     }
 
-    printMatches(matches: IMatch[]): void {}
+    printMatches(matches: IMatch[]): void {
+        const sorted = this.sortMatches(matches);
+
+        sorted.forEach((match, idx) => {
+            const uptime = Math.ceil((Date.now() - match.getStartTime()) / 1000);
+            const timeStr = match.isLive() ? ` [${uptime}’]` : "";
+            console.log(`${idx + 1}. ${match.getSummaryString()}${timeStr}\n`);
+        });
+    }
 }

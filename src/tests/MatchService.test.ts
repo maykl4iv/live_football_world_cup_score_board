@@ -77,11 +77,11 @@ test("Creates MatchService adds two matches, updates score and return live match
     const matchTwo = new Match("Italy", "England");
     matchService.createMatch(matchTwo.homeTeam, matchTwo.awayTeam);
     matchService.updateScore(matchOne.homeTeam, matchOne.awayTeam, 1, 0);
+    matchOne.updateScore(1, 0);
 
     matchService.printMatches(matchService.getLiveMatches());
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()} [30’]\n`);
 
-    matchOne.updateScore(1, 0);
     expect(matchService.getLiveMatches()).toEqual([matchOne, matchTwo]);
 
     jest.advanceTimersByTime(1_000);
@@ -95,22 +95,20 @@ test("Creates MatchService adds two matches, updates score and return live match
 
     matchService.updateScore(matchTwo.homeTeam, matchTwo.awayTeam, 1, 0);
     matchService.updateScore(matchTwo.homeTeam, matchTwo.awayTeam, 1, 1);
+    matchTwo.updateScore(1, 0);
+    matchTwo.updateScore(1, 1);
 
     matchService.printMatches(matchService.getLiveMatches());
-    expect(logSpy).toHaveBeenCalledWith(`1. ${matchTwo.getSummaryString()} [60’]\n`);
+    expect(logSpy).toHaveBeenCalledWith(`1. ${matchTwo.getSummaryString()} [61’]\n`);
 
     matchService.printMatches(matchService.getFinishedMatches());
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()}\n`);
-
-    matchTwo.updateScore(1, 0);
-    matchTwo.updateScore(1, 1);
     expect(matchService.getLiveMatches()).toEqual([matchTwo]);
     expect(matchService.getFinishedMatches()).toEqual([matchOne]);
 
     jest.advanceTimersByTime(30_000);
 
     matchService.printMatches(matchService.getFinishedMatches());
-
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchTwo.getSummaryString()}\n`);
     expect(logSpy).toHaveBeenCalledWith(`1. ${matchOne.getSummaryString()}\n`);
     expect(matchService.getLiveMatches()).toEqual([]);
