@@ -32,7 +32,11 @@ export class MatchService {
         }
     }
 
-    getLiveMatches() {}
+    getLiveMatches() {
+        return this.matches.filter((m) => m.isLive());
+    }
 
-    getFinishedMatches() {}
+    getFinishedMatches() {
+        return this.matches.filter((m) => !m.isLive());
+    }
 }
