@@ -20,6 +20,8 @@ export class Scoreboard {
         }
     }
 
+    startTicker() {}
+
     findMatch(home: string, away: string): IMatch | undefined {
         return this.matches.find((m) => m.homeTeam === home && m.awayTeam === away);
     }
@@ -31,4 +33,6 @@ export class Scoreboard {
     getFinishedMatches() {
         return this.matches.filter((m) => !m.isLive());
     }
+
+    render() {}
 }
