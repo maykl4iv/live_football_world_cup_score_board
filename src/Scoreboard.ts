@@ -53,11 +53,11 @@ export class Scoreboard {
     }
 
     getLiveMatches() {
-        return this.matches.filter((m) => m.isLive());
+        return this.matchService.getLiveMatches();
     }
 
     getFinishedMatches() {
-        return this.matches.filter((m) => !m.isLive());
+        return this.matchService.getFinishedMatches();
     }
 
     render(final = false) {

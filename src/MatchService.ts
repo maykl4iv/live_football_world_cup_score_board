@@ -1,7 +1,7 @@
 import { Match } from "./Match";
-import { IMatch } from "./types";
+import { IMatch, IMatchService } from "./types";
 
-export class MatchService {
+export class MatchService implements IMatchService {
     private matches: IMatch[];
 
     constructor() {

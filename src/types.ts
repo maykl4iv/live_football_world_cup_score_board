@@ -15,6 +15,8 @@ export interface IMatch {
 export interface IMatchService {
     createMatch(homeTeam: string, awayTeam: string): IMatch;
     findMatch(homeTeam: string, awayTeam: string): IMatch | undefined;
+    getLiveMatches(): IMatch[];
+    getFinishedMatches(): IMatch[];
 }
 
 export enum EventsTypes {
