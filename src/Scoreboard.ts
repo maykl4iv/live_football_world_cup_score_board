@@ -1,30 +1,27 @@
 import { IMatch, IEvent, EventsTypes } from "./types";
-import { Match } from "./Match";
 import { MatchService } from "./MatchService";
 
 export class Scoreboard {
     matchService: MatchService;
-    matches: IMatch[];
     #intervalId?: ReturnType<typeof setInterval>;
 
     constructor() {
         this.matchService = new MatchService();
-        this.matches = [];
     }
 
     feed(event: IEvent<EventsTypes>) {
-        const match = this.findMatch(event.homeTeam, event.awayTeam);
-
         switch (event.type) {
             case EventsTypes.start:
-                if (!match) {
-                    this.matchService.createMatch(event.homeTeam, event.awayTeam);
-                }
+                this.matchService.createMatch(event.homeTeam, event.awayTeam);
                 break;
             case EventsTypes.score:
-                if (match && match.isLive()) {
-                    match.updateScore(event.homeScore, event.awayScore);
-                }
+                this.matchService.updateScore(
+                    event.homeTeam,
+                    event.awayTeam,
+                    event.homeScore,
+                    event.awayScore
+                );
+
                 break;
         }
     }
