@@ -39,4 +39,10 @@ export class MatchService {
     getFinishedMatches() {
         return this.matches.filter((m) => !m.isLive());
     }
+
+    sortMatches(matches: IMatch[]): IMatch[] {
+        return [] as IMatch[];
+    }
+
+    printMatches(matches: IMatch[]): void {}
 }
