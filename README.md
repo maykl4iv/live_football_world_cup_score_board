@@ -40,7 +40,7 @@ The rendering logic was kept in the `Scoreboard` class, but rather than printing
 -   The `isLive()` method in the `Match` class determines if a match is still ongoing. Matches that are finished are sorted and displayed separately from the live matches. This clear distinction helps in easily identifying the current state of all matches.
 -   The scoreboard renders live matches in one section and finished matches in another to provide clarity.
 
-### 7. **Use of TypeScript Features**
+### 7. **Use of TypeScript/JavaScript Features**
 
 -   **Private Fields**: The `Match` class uses private fields for encapsulating internal state (e.g., `#startTime`, `#interval`) to ensure that the state cannot be changed from outside the class.
 -   **Type Safety**: Types for match and event objects are defined using TypeScript interfaces, ensuring better maintainability and fewer runtime errors.
